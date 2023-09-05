@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Регистрация
+{% endblock %}
+
+{% block body %}
+
+<body>
+<div class="modal modal-signin position-static d-block" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h4 class="fw-bold mb-0">Регистрация</h4>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form class="" method="post">
+                    {% for msg in get_flashed_messages() %}
+                    <div class="alert alert-warning">{{msg}}</div>
+                    {% endfor %}
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-4" name="fullname" maxlength="100" required>
+                        <label>ФИО</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control rounded-4" name="dob" required>
+                        <label>Дата рождения</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="tel" class="form-control rounded-4" name="phone" maxlength="11" minlength="11"
+                               pattern="[0-9]{11}" required>
+                        <label>Телефон</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control rounded-4" name="email" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-4" name="password" required>
+                        <label>Пароль</label>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Зарегистрироваться
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</body>
+
+{% endblock %}

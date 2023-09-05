@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Каталог
+{% endblock %}
+
+{% block body %}
+<span class="fs-4">Каталог</span><br><br>
+{% for i in route %}
+<div class="alert modal-content rounded-5 shadow bg-light">
+    <h3>Тур {{ i.id_route }}</h3>
+    <p>Стоимость: {{ i.price }}</p>
+    {% for t in tour %}
+    {% if t.id_route==i.id_route %}
+    <p><b>Даты поездки: {{ t.date_start }} - {{ t.date_finish}}</b></p>
+    {% endif %}
+    {% endfor %}
+    <a href="/tour/{{ i.id_route }}" class="py-2 mb-2 btn btn-outline-dark rounded-4">Дополнительная информация</a>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Профиль
+{% endblock %}
+
+{% block body %}
+<div class="d-flex flex-column flex-md-row">
+    <span class="fs-4">Ваш профиль</span>
+    <div class="ms-md-auto">
+        <a class="py-2 mb-2 btn btn-outline-dark rounded-4" href="/logout">Выйти</a>
+    </div>
+</div>
+<h3>{{ user.full_name }}</h3>
+<p>Дата рождения: {{ user.dob }}</p>
+<p>Номер телефона: {{ user.phone }}</p>
+<hr>
+<h4>История договоров</h4>
+{% for h in history %}
+{% if h.id_user==user.id %}
+<div class="alert modal-content rounded-5 shadow bg-light">
+    <p>ID договора: {{ h.id_contract }}</p>
+    <p>ФИО клиента: {{ user.full_name }}</p>
+    <p>Дата рождения: {{ user.dob}}</p>
+    <p>Серия/номер паспорта: {{ h.series_number_passport }}</p>
+    <p>Адрес: {{ h.address }}</p>
+    <p>Телефон: {{ user.phone }}</p>
+    <p>Вид оплаты: {{ h.payment_type }}</p>
+    <p>Путёвки:</p>
+
+    {% for hv in history_voucher %}
+    {% if hv.Voucher.id_contract==h.id_contract %}
+    <div class="alert modal-content rounded-5 bg-light">
+        <p>ID путёвки: {{ hv.Voucher.id_voucher }}</p>
+        <p>Тур {{ hv.Tourist_group.id_route }}</p>
+        <p>Номер группы: {{ hv.Tourist_group.id_group }}</p>
+        <p>Даты поездки: {{ hv.Tourist_group.date_start }} - {{ hv.Tourist_group.date_finish }}</p>
+        <p>ФИО: {{ hv.Voucher.full_name }}</p>
+        <p>Дата рождения: {{ hv.Voucher.dob }}</p>
+        <p>Серия/номер паспорта: {{ hv.Voucher.series_number_passport }}</p>
+        <p><b>Стоимость путёвки: {{ hv.Route.price }}</b></p>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+</div><br>
+{% endif %}
+{% endfor %}
+{% endblock %}

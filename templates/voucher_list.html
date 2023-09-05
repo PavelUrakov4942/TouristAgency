@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ваша покупка
+{% endblock %}
+
+{% block body %}
+<span class="fs-4">Ваш договор</span><br><br>
+{% for cat, msg in get_flashed_messages(True) %}
+{% if cat=="success" %}
+<div class="alert alert-success">{{msg}}</div>
+{% else %}
+<div class="alert alert-warning">{{msg}}</div>
+{% endif %}
+{% endfor %}
+<div class="alert modal-content rounded-5 shadow bg-light">
+    <h3>ID договора: {{ buy.Contract.id_contract }}</h3>
+    <p>Тур {{ buy.Tourist_group.id_route }}</p>
+    <p>Номер группы: {{ buy.Tourist_group.id_group }}</p>
+    <p>Даты поездки: {{ buy.Tourist_group.date_start }} - {{ buy.Tourist_group.date_finish }}</p>
+    <p>ФИО клиента: {{ buy.User.full_name }}</p>
+    <p>Дата рождения: {{ buy.User.dob}}</p>
+    <p>Серия/номер паспорта: {{ buy.Contract.series_number_passport }}</p>
+    <p>Адрес: {{ buy.Contract.address }}</p>
+    <p>Телефон: {{ buy.User.phone }}</p>
+    <p>Вид оплаты: {{ buy.Contract.payment_type }}</p>
+    <hr>
+    <span class="fs-4">Ваши путёвки по договору</span><br>
+    {% for l in list %}
+    {% if l.id_contract==buy.Contract.id_contract %}
+    <div class="alert modal-content rounded-5 bg-light">
+        <h3>ID путёвки: {{ l.id_voucher }}</h3>
+        <p>Тур {{ buy.Tourist_group.id_route }}</p>
+        <p>Номер группы: {{ buy.Tourist_group.id_group }}</p>
+        <p>Даты поездки: {{ buy.Tourist_group.date_start }} - {{ buy.Tourist_group.date_finish }}</p>
+        <p>ФИО: {{ l.full_name }}</p>
+        <p>Дата рождения: {{ l.dob }}</p>
+        <p>Серия/номер паспорта: {{ l.series_number_passport }}</p>
+        <p><b>Стоимость путёвки: {{ buy.Route.price }}</b></p>
+        <a href="/voucher_list_del_vouch/{{ l.id_voucher }}"
+           class="py-2 mb-2 btn btn-outline-dark rounded-4 modal-content">Отказаться от путёвки</a>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<a href="/voucher/{{ buy.Contract.id_contract }}/{{ buy.Tourist_group.id_group }}"
+   class="py-2 mb-2 btn btn-outline-dark rounded-4 modal-content"> Вернуться к покупке путёвок</a>
+<a href="/profile" class="py-2 mb-2 btn btn-outline-dark rounded-4 modal-content"> Готово</a>
+{% endblock %}

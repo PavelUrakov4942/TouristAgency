@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Тур {{ route_info.id_route }}
+{% endblock %}
+
+{% block body %}
+<span class="fs-4">Информация о туре</span><br><br>
+<div>
+    <h3>Тур {{ route_info.id_route }}</h3>
+    <p>Стоимость: {{ route_info.price }}</p>
+    <p>Страховая сумма: {{ route_info.insurance_sum }}</p>
+    <p>Численность группы: {{ route_info.min_number_tourists }} - {{ route_info.max_number_tourists}} человек</p>
+    <p></p>
+
+    <h3>Маршрутный лист</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Порядковый №</th>
+                <th scope="col">Дней в городе</th>
+                <th scope="col">Город</th>
+                <th scope="col">Страна</th>
+                <th scope="col">Экскурсия</th>
+                <th scope="col">Отель</th>
+                <th scope="col">Адрес отеля</th>
+                <th scope="col">Класс отеля</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for rl in route_list %}
+            {% if rl.Route.id_route==route_info.id_route %}
+            <tr>
+                <td>{{ rl.Arrival_point.index_number }}</td>
+                <td>{{ rl.Arrival_point.number_days }}</td>
+                <td>{{ rl.Arrival_point.city_name }}</td>
+                <td>{{ rl.Country.country_name }}</td>
+                <td>{{ rl.Excursion.excursion_name }}</td>
+                <td>{{ rl.Hotel.hotel_name }}</td>
+                <td>{{ rl.Hotel.address }}</td>
+                <td>{{ rl.Hotel_class.class_name }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+    {% for g in group_info %}
+    {% if g.id_route==route_info.id_route %}
+    <div class="alert modal-content rounded-5 shadow bg-light">
+        <p>Номер формируемой группы: {{ g.id_group }}</p>
+        <p><b>Даты поездки: {{ g.date_start }} - {{ g.date_finish}}</b></p>
+        <p><b>Количество доступных путёвок: {{ route_info.max_number_tourists - g.number_tourists_in_group }}</b></p>
+        <a href="/contract/group/{{ g.id_group }}" class="modal-content py-2 mb-2 btn btn-outline-dark rounded-4">Купить
+            путёвку</a>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+</div>
+{% endblock %}

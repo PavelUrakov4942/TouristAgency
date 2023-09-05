@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Вход в профиль
+{% endblock %}
+
+{% block body %}
+<body>
+<div class="modal modal-signin position-static d-block" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h4 class="fw-bold mb-0">Вход в профиль</h4>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form class="" method="post">
+                    {% for msg in get_flashed_messages() %}
+                    <div class="alert alert-warning">{{msg}}</div>
+                    {% endfor %}
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control rounded-4" name="email" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-4" name="password" required>
+                        <label>Пароль</label>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Войти</button>
+                    <hr class="my-4">
+                    <h2 class="fs-5 fw-bold mb-3">Ещё не зарегистрированы?</h2>
+                    <a class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="submit" href="/registration">
+                        Зарегистрироваться
+                    </a>
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

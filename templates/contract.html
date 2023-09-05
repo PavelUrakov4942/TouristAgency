@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Договор
+{% endblock %}
+
+{% block body %}
+<body>
+<div class="modal modal-signin position-static d-block" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h4 class="fw-bold mb-0">Заполните форму</h4>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form class="" method="post">
+                    {% for msg in get_flashed_messages() %}
+                    <div class="alert alert-warning">{{msg}}</div>
+                    {% endfor %}
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-4" name="series_number_passport"
+                               pattern="[0-9]{4}/[0-9]{6}" required>
+                        <label>Серия/номер паспорта</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-4" name="address" maxlength="100" required>
+                        <label>Адрес</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select rounded-4" name="payment_type" required>
+                            <option value="">...</option>
+                            <option value="Наличные">Наличные</option>
+                            <option value="Банковская карта">Банковская карта</option>
+                        </select>
+                        <label>Способ оплаты</label>
+                    </div>
+
+                    <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="submit">
+                        Подтвердить данные
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

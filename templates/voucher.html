@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Покупка путёвки
+{% endblock %}
+
+{% block body %}
+<body>
+<div class="modal modal-signin position-static d-block" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h4 class="fw-bold mb-0">Путёвка</h4>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form class="" method="post">
+                    {% for cat, msg in get_flashed_messages(True) %}
+                    {% if cat=="success" %}
+                    <div class="alert alert-success">{{msg}}</div>
+                    {% else %}
+                    <div class="alert alert-warning">{{msg}}</div>
+                    {% endif %}
+                    {% endfor %}
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-4" name="fullname" maxlength="100" required>
+                        <label>ФИО</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control rounded-4" name="dob" required>
+                        <label>Дата рождения</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-4" name="series_number_passport" required>
+                        <label>Серия/номер паспорта</label>
+                    </div>
+                    <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="submit">Купить путёвку
+                    </button>
+                    <a class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="submit" href="/voucher_list">
+                        Завершить покупку
+                    </a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

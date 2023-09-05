@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Договор
+{% endblock %}
+
+{% block body %}
+<span class="fs-4">Ваш договор</span><br><br>
+<div class="alert modal-content rounded-5 shadow bg-light">
+    <h3>ID договора: {{ contract_info.Contract.id_contract }}</h3>
+    <p>Тур {{ contract_info.Tourist_group.id_route }}</p>
+    <p>Номер группы: {{ contract_info.Tourist_group.id_group }}</p>
+    <p>Даты поездки: {{ contract_info.Tourist_group.date_start }} - {{ contract_info.Tourist_group.date_finish }}</p>
+    <p>ФИО клиента: {{ contract_info.User.full_name }}</p>
+    <p>Дата рождения: {{ contract_info.User.dob}}</p>
+    <p>Серия/номер паспорта: {{ contract_info.Contract.series_number_passport }}</p>
+    <p>Адрес: {{ contract_info.Contract.address }}</p>
+    <p>Телефон: {{ contract_info.User.phone }}</p>
+    <p>Вид оплаты: {{ contract_info.Contract.payment_type }}</p>
+    <p></p>
+    <a href="/voucher/{{ contract_info.Contract.id_contract }}/{{ contract_info.Tourist_group.id_group }}"
+       class="py-2 mb-2 btn btn-outline-dark rounded-4">Перейти к покупке</a>
+</div>
+{% endblock %}
